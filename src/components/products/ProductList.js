@@ -1,3 +1,4 @@
+//Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
 
 export const ProductList = () => {
@@ -21,7 +22,7 @@ export const ProductList = () => {
                 products.map(
                     (product) => {
                         return <div>
-                            <p key={`product--${product.id}`}>{product.name}</p>
+                            <h3 key={`product--${product.id}`}>{product.name}</h3>
                             <p>Product Type: {product.productType.type}</p>
                             <p>Price: ${product.price}</p>
                             </div>

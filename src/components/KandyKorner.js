@@ -1,16 +1,16 @@
 import React from "react"
+import { ApplicationViews } from "./ApplicationViews"
 import { LocationList } from "./locations/LocationList"
+import { NavBar } from "./nav/NavBar"
 import { ProductList } from "./products/ProductList"
 
 
 export const KandyKorner = () => {
     return (
         <>
+        <NavBar />
         <h1>Kandy Korner</h1>
-        <h2>Locations</h2>
-        <LocationList />
-        <h2>Products</h2>
-        <ProductList />
+        <ApplicationViews />
 
         </>
 
