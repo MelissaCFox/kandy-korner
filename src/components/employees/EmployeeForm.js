@@ -76,7 +76,7 @@ export const EmployeeForm = () => {
                         onChange={
                             (evt) => {
                                 const copy = { ...employee }
-                                copy.location = evt.target.value
+                                copy.locationId = evt.target.value
                                 update(copy)
                             }
 

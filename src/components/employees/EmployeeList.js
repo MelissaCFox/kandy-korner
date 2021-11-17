@@ -8,7 +8,7 @@ export const EmployeeList = () => {
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/employees?_expand=location&_sort=manager&_order=desc")
+            fetch("http://localhost:8088/employees?_expand=location&_sort=hourlyRate&_order=desc")
                 .then(res => res.json())
                 .then((data) => {
                     updateEmployee(data)

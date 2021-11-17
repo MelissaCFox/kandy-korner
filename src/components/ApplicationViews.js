@@ -30,6 +30,10 @@ export const ApplicationViews = () => {
                 <CustomerList />
             </Route>
 
+            <Route path ="/orders">
+                
+            </Route>
+
         </>
     )
 }

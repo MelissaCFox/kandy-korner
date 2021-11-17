@@ -23,7 +23,6 @@ export const CustomerList = () => {
                     (customer) => {
                         return <div key={`customer--${customer.id}`}>
                             <h3>{customer.name}</h3>
-                            <section className="customer_memberStatus">Member Status: {customer.member? `Active` : `Not a member`}</section>
                             <section className="customer_email">Email: {customer.email}</section>
 
                         </div>
