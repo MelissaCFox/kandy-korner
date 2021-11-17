@@ -125,7 +125,6 @@ export const EmployeeForm = () => {
                     <label htmlFor="rate">Hourly Rate:  </label>
                     <input type="number"
                         className="form-control"
-                        // placeholder="Hourly rate"
                         onChange={
                             (evt) => {
                                 const copy = { ...employee }
