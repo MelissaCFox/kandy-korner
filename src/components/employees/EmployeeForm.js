@@ -73,14 +73,16 @@ export const EmployeeForm = () => {
                 <div className="form-group">
                     <label htmlFor="location">Location:  </label>
                     <select
+                        
                         onChange={
                             (evt) => {
                                 const copy = { ...employee }
-                                copy.locationId = evt.target.value
+                                copy.locationId = parseInt(evt.target.value)
                                 update(copy)
                             }
 
                         } >
+                            <option key={`location--0`} value={`0`}>Select a location</option>
                             {locations.map(
                                 (location) => {
                                     return <option key={`location--${location.id}`} value={location.id}>{location.city}</option>

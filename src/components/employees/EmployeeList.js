@@ -17,6 +17,20 @@ export const EmployeeList = () => {
         []
     )
 
+    const fireEmployee = (id) => {
+            return fetch(`http://localhost:8088/employees/${id}`, {
+            method: "DELETE"
+        })
+            .then(() => {
+                fetch("http://localhost:8088/employees?_expand=location&_sort=hourlyRate&_order=desc")
+                .then(res => res.json())
+                .then((data) => {
+                    updateEmployee(data)
+                })
+            })
+
+    }
+    
 
     return (
 
@@ -34,7 +48,7 @@ export const EmployeeList = () => {
                             <section className="employee_managerStatus">Postion: {employee.manager? `Manager` : `Regular Employee`}</section>
                             <section className="employee_fullTimeStatus">Status: {employee.fullTime? `Full-Time` : `Part-Time`}</section>
                             <section className="employee_hourlyRate">Hourly Rate: ${employee.hourlyRate}</section>
-                        
+                            <button className="btn btn-primary" value={employee.id} onClick={() => {fireEmployee(employee.id)}}>Fire Employee</button>
                         
                         </div>
                     }
