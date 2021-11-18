@@ -26,32 +26,25 @@ export const MyOrders = () => {
         },
         [])
 
+
     return (
         <>
             {
 
                 purchases.map(
                     (purchase) => {
+                        const foundProduct = products.find(
+                            (product) => product.id === purchase.productLocation.productId
+                        )
+                        if (foundProduct) {
+                
+                            return <div key={`purchase--${purchase.id}`}>
+                                <h3>Purchase ID # {purchase.id}</h3>
+                                <section className="purchase__productName">Product Name: {foundProduct.name}</section>
+                                <section className="purchase__productPrice">Price: ${foundProduct.price}</section>
+                            </div>
+                        }
 
-                        return <div key={`purchase--${purchase.id}`}>Purchase # {purchase.id}
-                            {() => {
-
-                                const foundProduct = products.find(
-                                    (product) => product.id === purchase.productLocation.productId
-                                )
-                                if (foundProduct) {
-                                    return `<h3>Name: ${foundProduct.name}</h3><p>Price: ${foundProduct.price}</p>`
-
-                                } else {
-                                    return `No Purchases`
-                                }
-
-
-                            }
-                            }
-
-
-                        </div>
                     }
                 )
             }

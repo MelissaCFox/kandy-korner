@@ -21,7 +21,7 @@ export const ProductList = () => {
         event.preventDefault()
         const newPurchase = {
             customerId: parseInt(localStorage.getItem("kandy_customer")),
-            pproductLocationId: 1,
+            productLocationId: parseInt(event.target.value),
             datePurchased: new Date().toLocaleDateString()
         }
 
@@ -35,7 +35,7 @@ export const ProductList = () => {
 
         return fetch("http://localhost:8088/purchases", fetchOption)
             .then(() => {
-                history.push("/purchases")
+                history.push("/orders")
             })
     }
 
@@ -49,7 +49,7 @@ export const ProductList = () => {
                             <h3>{product.name}</h3>
                             <p>Product Type: {product.productType.type}</p>
                             <p>Price: ${product.price}</p>
-                            <button className="btn btn-primary" onClick={purchaseProduct}>Purchase</button>
+                            <button className="btn btn-primary" value={product.productLocationId} onClick={purchaseProduct}>Purchase</button>
                             </div>
                     }
                 )
