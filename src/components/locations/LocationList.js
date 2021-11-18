@@ -28,7 +28,7 @@ export const LocationList = () => {
                             <section className="location__address">{location.address}</section>
                             <button value={location.id} onClick={() => {
                                 localStorage.setItem("kandy_location", parseInt(location.id))
-                                history.push("/order")
+                                history.push("/products/order")
                                 }}>Shop at This Location</button>
                         
                         </div>

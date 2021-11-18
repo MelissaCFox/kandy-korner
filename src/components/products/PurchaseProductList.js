@@ -75,17 +75,17 @@ export const PurchaseProductList = () => {
             return <>
                 <h2>You Are Currently Shopping at the <em>{foundLocation.city}</em> Location</h2>
                 <fieldset>
-                <div className="form-group">
-                    <label htmlFor="location">Location:  </label>
-                    <select onChange={(event) => {
-                                localStorage.setItem("kandy_location", parseInt(event.target.value))
-                                history.push("/order")
-                                fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}`)
+                    <div className="form-group">
+                        <label htmlFor="location">Location:  </label>
+                        <select onChange={(event) => {
+                            localStorage.setItem("kandy_location", parseInt(event.target.value))
+                            history.push("/products/order")
+                            fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}`)
                                 .then(res => res.json())
                                 .then((data) => {
                                     updateProductLocationObjects(data)
                                 })
-                                }}>
+                        }}>
                             <option key={`location--0`} value={`0`}>Select a different location</option>
                             {locations.map(
                                 (location) => {
@@ -93,33 +93,33 @@ export const PurchaseProductList = () => {
                                 }
                             )}
 
-                    </select>
-                </div>
-            </fieldset>
-
-
-
+                        </select>
+                    </div>
+                </fieldset>
                 {
                     productLocationObjects.map(
                         (productLocationObj) => {
                             const foundProduct = products.find((product) => product.id === productLocationObj.productId)
-                           if (foundProduct) {
+                            if (foundProduct) {
 
-                           return <div key={`productLocation--${productLocationObj.id}`}>
-                                <h3>{foundProduct.name}</h3>
-                                <p>Price: ${foundProduct.price}</p>
-                                <button className="btn btn-primary" value={productLocationObj.id} onClick={purchaseProduct}>Purchase</button>
-                            </div>
+                                return <div key={`productLocation--${productLocationObj.id}`}>
+                                    <h3>{foundProduct.name}</h3>
+                                    <p>Price: ${foundProduct.price}</p>
+                                    <button className="btn btn-primary" value={productLocationObj.id} onClick={purchaseProduct}>Purchase</button>
+                                </div>
 
-                           }
+                            }
                         }
                     )
                 }
             </>
-        }else {
+        } else {
             return <>
-            <h1>Please Select a Location First</h1>
+                <h1>Please Select a Location First</h1>
             </>
         }
     }
 }
+
+
+

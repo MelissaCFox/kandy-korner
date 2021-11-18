@@ -34,25 +34,8 @@ export const ProductList = () => {
 
 
     return <>
-        <div className="products__message">
-            <h2>Please Select One of Our Locations to Purchase a Product</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="location">Location:  </label>
-                    <select onChange={(event) => {
-                        localStorage.setItem("kandy_location", parseInt(event.target.value))
-                        history.push("/order")
-                    }}>
-                        <option key={`location--0`} value={`0`}>Select a location</option>
-                        {locations.map(
-                            (location) => {
-                                return <option key={`location--${location.id}`} value={location.id}>{location.city}</option>
-                            }
-                        )}
+        <div className="products__page">
 
-                    </select>
-                </div>
-            </fieldset>
             <p>Below is a list of all available products sold by Kandy Korner</p>
             <div className="product__list">
                 {
@@ -65,6 +48,25 @@ export const ProductList = () => {
                     )
                 }
             </div>
+            
+            <h2>Please Select One of Our Locations to Purchase a Product</h2>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="location">Location:  </label>
+                    <select onChange={(event) => {
+                        localStorage.setItem("kandy_location", parseInt(event.target.value))
+                        history.push("/products/order")
+                    }}>
+                        <option key={`location--0`} value={`0`}>Select a location</option>
+                        {locations.map(
+                            (location) => {
+                                return <option key={`location--${location.id}`} value={location.id}>{location.city}</option>
+                            }
+                        )}
+
+                    </select>
+                </div>
+            </fieldset>
 
 
 

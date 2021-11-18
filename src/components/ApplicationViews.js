@@ -12,11 +12,11 @@ import { PurchaseProductList } from "./products/PurchaseProductList";
 export const ApplicationViews = () => {
     return (
         <>
-            <Route exaxct path="/products">
+            <Route exact path="/products">
                 <ProductList />
             </Route>
 
-            <Route exaxct path="/order">
+            <Route exaxct path="/products/order">
                 <PurchaseProductList />
             </Route>
 
