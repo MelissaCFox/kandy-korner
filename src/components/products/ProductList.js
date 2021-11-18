@@ -1,10 +1,9 @@
 //Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const ProductList = () => {
     const [products, updateProduct] = useState([])
-    const history = useHistory()
+
 
     useEffect(
         () => {
@@ -17,43 +16,24 @@ export const ProductList = () => {
         []
     )
 
-    const purchaseProduct = (event) => {
-        event.preventDefault()
-        const newPurchase = {
-            customerId: parseInt(localStorage.getItem("kandy_customer")),
-            productLocationId: parseInt(event.target.value),
-            datePurchased: new Date().toLocaleDateString()
-        }
-
-        const fetchOption = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newPurchase)
-        }
-
-        return fetch("http://localhost:8088/purchases", fetchOption)
-            .then(() => {
-                history.push("/orders")
-            })
-    }
 
 
-    return (
-        <>
-            {
-                products.map(
-                    (product) => {
-                        return <div key={`product--${product.id}`}>
-                            <h3>{product.name}</h3>
-                            <p>Product Type: {product.productType.type}</p>
-                            <p>Price: ${product.price}</p>
-                            <button className="btn btn-primary" value={product.productLocationId} onClick={purchaseProduct}>Purchase</button>
-                            </div>
+
+        return <>
+            <div className="products__message">
+                <h2>Please Checkout One of Our Locations to Purchase a Product</h2>
+                <p>Below is a list of all available products sold by Kandy Korner</p>
+                <div className="product__list">
+                    {
+                        products.map(
+                            (product) => {
+                                return <div key={`product--${product.id}`}>
+                                    <h3>{product.name}</h3>
+                                </div>
+                            }
+                        )
                     }
-                )
-            }
+                </div>
+            </div>
         </>
-    )
 }

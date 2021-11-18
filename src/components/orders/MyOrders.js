@@ -43,6 +43,8 @@ export const MyOrders = () => {
                                 <section className="purchase__productName">Product Name: {foundProduct.name}</section>
                                 <section className="purchase__productPrice">Price: ${foundProduct.price}</section>
                             </div>
+                        } else {
+                            return <h3>No Recent Orders</h3>
                         }
 
                     }

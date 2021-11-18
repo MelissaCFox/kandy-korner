@@ -6,32 +6,37 @@ import { EmployeeList } from "./employees/EmployeeList";
 import { LocationList } from "./locations/LocationList";
 import { MyOrders } from "./orders/MyOrders";
 import { ProductList } from "./products/ProductList";
+import { PurchaseProductList } from "./products/PurchaseProductList";
 
 
 export const ApplicationViews = () => {
     return (
         <>
-            <Route exaxct path ="/products">
+            <Route exaxct path="/products">
                 <ProductList />
             </Route>
 
-            <Route exact path ="/locations">
+            <Route exaxct path="/order">
+                <PurchaseProductList />
+            </Route>
+
+            <Route exact path="/locations">
                 <LocationList />
             </Route>
 
-            <Route exact path ="/employees">
+            <Route exact path="/employees">
                 <EmployeeList />
             </Route>
 
-            <Route exact path ="/employees/hire">
+            <Route exact path="/employees/hire">
                 <EmployeeForm />
             </Route>
 
-            <Route path ="/customers">
+            <Route path="/customers">
                 <CustomerList />
             </Route>
 
-            <Route path ="/orders">
+            <Route path="/purchases">
                 <MyOrders />
             </Route>
 
