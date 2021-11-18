@@ -74,6 +74,31 @@ export const PurchaseProductList = () => {
         if (foundLocation) {
             return <>
                 <h2>You Are Currently Shopping at the <em>{foundLocation.city}</em> Location</h2>
+                <fieldset>
+                <div className="form-group">
+                    <label htmlFor="location">Location:  </label>
+                    <select onChange={(event) => {
+                                localStorage.setItem("kandy_location", parseInt(event.target.value))
+                                history.push("/order")
+                                fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}`)
+                                .then(res => res.json())
+                                .then((data) => {
+                                    updateProductLocationObjects(data)
+                                })
+                                }}>
+                            <option key={`location--0`} value={`0`}>Select a different location</option>
+                            {locations.map(
+                                (location) => {
+                                    return <option key={`location--${location.id}`} value={location.id}>{location.city}</option>
+                                }
+                            )}
+
+                    </select>
+                </div>
+            </fieldset>
+
+
+
                 {
                     productLocationObjects.map(
                         (productLocationObj) => {
