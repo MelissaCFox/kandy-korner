@@ -2,8 +2,9 @@
 
 .navbar {
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
     text-align: center;
     background-color: rgb(133, 113, 63);
     font-family: 'Emilys Candy', cursive;
@@ -12,11 +13,12 @@
 }
 
 .navbar__item {
-    flex-basis: 20%;
+
     list-style-type: none;
     text-align: center;
     background-color: rgb(241, 193, 233);
-    margin: 0 5rem;
-    padding: 1rem 0;
+    margin: 0 2%;
+    padding: 1rem;
+    width: 6rem;
 
 }

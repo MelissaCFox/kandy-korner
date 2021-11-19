@@ -13,6 +13,10 @@ import { Test } from "./Test";
 export const ApplicationViews = () => {
     return (
         <>
+            <Route exact path="/">
+                <ProductList />
+            </Route>
+
             <Route path="/products">
                 <ProductList />
             </Route>

@@ -1,12 +1,11 @@
 //Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import { ApplicationViews } from "../ApplicationViews"
 import "./ProductList.css"
 
 export const ProductList = () => {
     const [products, updateProduct] = useState([])
+    const [productTypes, updateProductTypes] = useState([])
 
 
     useEffect(
@@ -20,6 +19,17 @@ export const ProductList = () => {
         []
     )
 
+    useEffect(
+        () => {
+            fetch("http://localhost:8088/productTypes")
+                .then(res => res.json())
+                .then((data) => {
+                    updateProductTypes(data)
+                })
+        },
+        []
+    )
+
 
 
 
@@ -27,13 +37,17 @@ export const ProductList = () => {
         <div className="products__page">
 
             <div className="products__all">
-            <p>Below is a list of all available products sold by Kandy Korner</p>
+            <p className="heading">Below is a list of all available products sold by Kandy Korner</p>
             <div className="product__list">
                 {
                     products.map(
                         (product) => {
+                            const foundProductType = productTypes.find((productType) => productType.id === product.productTypeId)
+                            
                             return <div key={`product--${product.id}`}>
-                                <div className="product__name">{product.name}</div>
+                                <div className="product__name">{product.name}
+                                <div className="product__type">({foundProductType?.type})</div>
+                                </div>
                             </div>
                         }
                     )
@@ -41,7 +55,7 @@ export const ProductList = () => {
             </div>
             </div>
             
-            <h3>Please Select One of Our <Link to="/locations">Locations</Link> to Purchase a Product</h3>
+            <h3 className="heading">Please Select One of Our <Link to="/locations">Locations</Link> to Purchase a Product</h3>
 
         </div>
     </>

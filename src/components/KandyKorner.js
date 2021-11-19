@@ -16,7 +16,7 @@ export const KandyKorner = () => {
                         return (
                             <>
                                 <NavBar />
-                                <h1>Kandy Korner</h1>
+                                <h1 className="store-name">Kandy Korner</h1>
                                 <ApplicationViews />
                             </>
                         );

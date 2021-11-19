@@ -74,6 +74,8 @@ export const PurchaseProductList = (props) => {
 
         if (foundLocation) {
             return <>
+            <div className="purchase-products">
+                <div className="location-info">
                 <h2>You Are Currently Shopping at the <em>{foundLocation.city}</em> Location</h2>
                 <fieldset>
                     <div className="form-group">
@@ -97,13 +99,15 @@ export const PurchaseProductList = (props) => {
                         </select>
                     </div>
                 </fieldset>
+                </div>
+                <div className="productLocations--list">
                 {
                     productLocationObjects.map(
                         (productLocationObj) => {
                             const foundProduct = products.find((product) => product.id === productLocationObj.productId)
                             if (foundProduct) {
 
-                                return <div key={`productLocation--${productLocationObj.id}`}>
+                                return <div className="productLocations--item" key={`productLocation--${productLocationObj.id}`}>
                                     <h3>{foundProduct.name}</h3>
                                     <p>Price: ${foundProduct.price}</p>
                                     <button className="btn btn-primary" value={productLocationObj.id} onClick={purchaseProduct}>Purchase</button>
@@ -113,6 +117,8 @@ export const PurchaseProductList = (props) => {
                         }
                     )
                 }
+                </div>
+                </div>
             </>
         } else {
             return <>

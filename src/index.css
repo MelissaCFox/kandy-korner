@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.store-name {
+  font-size: 5rem;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -15,4 +19,5 @@ code {
 h1 {
   font-family: 'Emilys Candy', cursive;
   margin-left: 5rem;
+
 }

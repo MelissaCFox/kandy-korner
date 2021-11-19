@@ -1,0 +1,30 @@
+.locations-heading {
+    text-align: center;
+}
+
+.locations-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.location-item {
+    margin: 0.5rem 4rem;
+    padding: 1rem;
+    background-color: rgb(212, 241, 168);
+    border: dashed rgb(170, 169, 240);
+    width: 17rem;
+}
+
+.button-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.location-button {
+    padding: 0.5rem;
+    align-items: center;
+    margin-top: 0.7rem;
+    justify-self: center;
+}
