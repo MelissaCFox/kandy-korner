@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import "./CustomerList.css"
 
 export const CustomerList = () => {
     const [customers, updateCustomer] = useState([])
@@ -18,6 +19,7 @@ export const CustomerList = () => {
     return (
 
         <>
+        <div className="customer-list">
             {
                 customers.map(
                     (customer) => {
@@ -29,6 +31,7 @@ export const CustomerList = () => {
                     }
                 )
             }
+            </div>
         </>
     )
 }

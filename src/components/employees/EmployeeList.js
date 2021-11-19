@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import "./Employees.css"
 
 export const EmployeeList = () => {
     const [employees, updateEmployee] = useState([])
@@ -35,10 +36,10 @@ export const EmployeeList = () => {
     return (
 
         <>
-            <div>
-                <button onClick={() => history.push("/employees/hire")}>Hire Employee</button>
+            <div className="hire-button-div">
+                <button className="hire-button" onClick={() => history.push("/employees/hire")}>Hire Employee</button>
             </div>
-
+            <div className="employee-list">
             {
                 employees.map(
                     (employee) => {
@@ -54,6 +55,7 @@ export const EmployeeList = () => {
                     }
                 )
             }
+            </div>
         </>
     )
 }

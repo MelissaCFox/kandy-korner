@@ -1,0 +1,13 @@
+.orders-heading {
+    text-align: right;
+}
+
+.orders-list {
+    margin-left: 10rem;
+}
+
+.purchase__item {
+    border-bottom: solid 1px;
+    width: 20%;
+    padding-bottom: 1rem;
+}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import "./Employees.css"
 
 export const EmployeeForm = () => {
     const [employee, update] = useState({
@@ -110,7 +111,7 @@ export const EmployeeForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="fullTime">Full Time </label>
-                    <input
+                    <input className="name-field"
                         required autoFocus
                         type="checkbox"
                         onChange={
@@ -123,10 +124,10 @@ export const EmployeeForm = () => {
                 </div>
             </fieldset>
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="rate">Hourly Rate:  </label>
+                <div className="form-group rate">
+                    <label className="rate-label"htmlFor="rate">Hourly Rate:  </label>
                     <input type="number"
-                        className="form-control"
+                        className="form-control rate-field"
                         onChange={
                             (evt) => {
                                 const copy = { ...employee }
@@ -140,6 +141,9 @@ export const EmployeeForm = () => {
 
             <button className="btn btn-primary" onClick={saveEmployee}>
                 Hire Employee
+            </button>
+            <button className="btn btn-primary" onClick={() => history.push("/employees")}>
+                Cancel
             </button>
         </form>
     )

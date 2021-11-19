@@ -1,0 +1,38 @@
+.employee-list {
+    margin-left: 10rem;
+}
+
+.employeeForm {
+    margin: 0 5rem;
+}
+
+.rate {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.rate-field {
+    width: 3.75rem;
+    margin-left: 1rem;
+}
+
+.rate-label {
+    align-self: center;
+}
+
+.form-group {
+    width: 50%;
+}
+
+.hire-button-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hire-button {
+    padding: 1rem 2rem;
+    border: dotted 2px rgb(105, 81, 105);
+    background-color: rgb(202, 224, 241);
+}
