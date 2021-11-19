@@ -5,7 +5,6 @@ import "./MyOrders.css"
 export const MyOrders = () => {
     const [purchases, updatePurchases] = useState([])
     const [products, updateProducts] = useState([])
-    const [customers, updateCustomers] = useState([])
     const [currentCustomer, changeCurrentCustomer] = useState({})
 
 
@@ -32,23 +31,12 @@ export const MyOrders = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/customers`)
+            fetch(`http://localhost:8088/customers/${parseInt(localStorage.getItem("kandy_customer"))}`)
                 .then(res => res.json())
                 .then((data) => {
-                    updateCustomers(data)
+                    changeCurrentCustomer(data)
                 })
-        },
-        []
-    )
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/customers/${parseInt(localStorage.getItem("kandy_customer"))}`)
-            .then(res => res.json())
-            .then((data) => {
-                changeCurrentCustomer(data)
-            })
-            
         },
         []
     )
@@ -56,17 +44,17 @@ export const MyOrders = () => {
 
     return (
         <>
-
-
             <div className="heading">Orders For {currentCustomer?.name}</div>
             <div className="customer-list">
-                {
 
+                {
                     purchases.map(
                         (purchase) => {
+                            debugger
                             const foundProduct = products.find(
                                 (product) => product.id === purchase.productLocation.productId
                             )
+
                             if (foundProduct) {
 
                                 return <div className="purchase__item" key={`purchase--${purchase.id}`}>
@@ -75,9 +63,8 @@ export const MyOrders = () => {
                                     <section className="purchase__productPrice">Price: ${foundProduct.price}</section>
                                 </div>
                             } else {
-                                return <h3>No Recent Orders</h3>
+                                return <div>No Recent Orders</div>
                             }
-
                         }
                     )
                 }

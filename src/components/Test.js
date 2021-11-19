@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 export const Test = () => {
 
     const [locations, updateLocations] = useState([])
+    const [products, updateProducts] = useState([])
 
     useEffect(
         () => {
@@ -14,23 +15,43 @@ export const Test = () => {
         },
         []
     )
+    useEffect(
+        () => {
+            fetch("http://localhost:8088/products")
+                .then(res => res.json())
+                .then((data) => {
+                    updateProducts(data)
+                })
+        },
+        []
+    )
 
 
     return <>
-        <h2>Test: Product Location Info</h2>
+        <h2>Test: ProductLocation Product Info</h2>
+
         {
-            locations.forEach(
+            locations.map(
                 (locationObj) => {
+                    
                     locationObj.productLocations.map(
-                        (productLocationObject) => {
+                        (productLocationObj) => {
+                            const foundProduct = products.find(
+                                (product) => {
+                                    return product.id === productLocationObj.productId
+                                }
+                            )
+                            debugger
+                            if (foundProduct) {
+                                return <div key={productLocationObj.id}>
+                                    Product Name: {foundProduct.name}
 
-                            return <div key={productLocationObject.id}>
-                                ProductId: {productLocationObject.productId}, LocationID: {productLocationObject.locationId}
-
-                            </div>
+                                </div>
+                            } else {
+                                return <div>No Product</div>
+                            }
                         }
                     )
-
                 }
             )
 
@@ -40,3 +61,20 @@ export const Test = () => {
 
 }
 
+// {
+//     locations.forEach(
+//         (locationObj) => {
+//             locationObj.productLocations.map(
+//                 (productLocationObject) => {
+
+//                     return <div key={productLocationObject.id}>
+//                         ProductId: {productLocationObject.productId}, LocationID: {productLocationObject.locationId}
+
+//                     </div>
+//                 }
+//             )
+
+//         }
+//     )
+
+// }
