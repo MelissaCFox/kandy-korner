@@ -41,34 +41,35 @@ export const MyOrders = () => {
         []
     )
 
+    if (purchases.length > 0) {
+        return (
+            <>
+                <h2 className="heading">Orders For {currentCustomer.name}</h2>
+                <div className="customer-list">
 
-    return (
-        <>
-            <div className="heading">Orders For {currentCustomer?.name}</div>
-            <div className="customer-list">
-
-                {
-                    purchases.map(
-                        (purchase) => {
-                            debugger
-                            const foundProduct = products.find(
-                                (product) => product.id === purchase.productLocation.productId
-                            )
-
-                            if (foundProduct) {
-
+                    {
+                        purchases.map(
+                            (purchase) => {
+                                const foundProduct = products.find(
+                                    (product) => product.id === purchase.productLocation.productId
+                                )
                                 return <div className="purchase__item" key={`purchase--${purchase.id}`}>
                                     <h3>Purchase # {purchase.id}</h3>
-                                    <section className="purchase__productName">Product Name: {foundProduct.name}</section>
-                                    <section className="purchase__productPrice">Price: ${foundProduct.price}</section>
+                                    <section className="purchase__productName">Product Name: {foundProduct?.name}</section>
+                                    <section className="purchase__productPrice">Price: ${foundProduct?.price}</section>
                                 </div>
-                            } else {
-                                return <div>No Recent Orders</div>
+
                             }
-                        }
-                    )
-                }
-            </div>
+                        )
+                    }
+                </div>
+            </>
+        )
+
+    } else {
+        return <>
+            <h2 className="heading">Orders For {currentCustomer.name}</h2>
+            <div className="heading">No Recent Orders</div>
         </>
-    )
+    }
 }
