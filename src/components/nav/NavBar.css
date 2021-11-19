@@ -1,10 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap');
+
 .navbar {
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
+    text-align: center;
+    background-color: rgb(133, 113, 63);
+    font-family: 'Emilys Candy', cursive;
+    margin: 0;
+
 }
 
 .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
+    text-align: center;
+    background-color: rgb(241, 193, 233);
+    margin: 0 5rem;
+    padding: 1rem 0;
+
 }

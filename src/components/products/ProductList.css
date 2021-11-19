@@ -1,0 +1,26 @@
+.products__all {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60%;
+    align-self: center;
+
+}
+
+.product__name {
+    padding: 1.5rem 0.5rem;
+    margin: 1rem;
+    width: 10rem;
+    background-color:rgb(215, 247, 252);
+    text-align: center;
+    border: black dotted 1px;
+    border-radius: 25%;
+
+}

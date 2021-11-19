@@ -29,8 +29,9 @@ export const MyOrders = () => {
 
     return (
         <>
+        <h2>My Orders</h2>
             {
-
+                
                 purchases.map(
                     (purchase) => {
                         const foundProduct = products.find(
@@ -42,7 +43,7 @@ export const MyOrders = () => {
                                 <h3>Purchase ID # {purchase.id}</h3>
                                 <section className="purchase__productName">Product Name: {foundProduct.name}</section>
                                 <section className="purchase__productPrice">Price: ${foundProduct.price}</section>
-                            </div>
+                                </div>
                         } else {
                             return <h3>No Recent Orders</h3>
                         }

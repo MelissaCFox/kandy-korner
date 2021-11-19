@@ -1,8 +1,9 @@
 //Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import "./ProductList.css"
 
-export const PurchaseProductList = () => {
+export const PurchaseProductList = (props) => {
     const [products, updateProduct] = useState([])
     const [productLocationObjects, updateProductLocationObjects] = useState([])
     const [locations, updateLocations] = useState([])
