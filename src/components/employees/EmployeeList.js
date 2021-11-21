@@ -3,8 +3,10 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import "./Employees.css"
 
 export const EmployeeList = () => {
+    //UseState hook decalres a new employees state and updateEmployee component to maintain state for employees array
     const [employees, updateEmployee] = useState([])
 
+    //useHistory() is a React hook that navigates to a specific Route using "the state variable".push("the routh path")
     const history = useHistory()
 
     useEffect(
@@ -32,7 +34,7 @@ export const EmployeeList = () => {
 
     }
     
-
+    //onClick event handler directly within fire button to invoke fireEmployee component
     return (
 
         <>

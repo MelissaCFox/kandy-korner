@@ -3,9 +3,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import './LocationList.css';
 
 export const LocationList = () => {
+    
+    //useState hook declares a new locations state and an updateLocation component to manage locations state
     const [locations, updateLocation] = useState([])
+    //setting useHistory hook equal to a variable allows us to push the user to a different route with variable.push("/route")
     const history = useHistory()
 
+    //useEffect hook fetches locations data from API and update state with updateLocation component declared in useState
     useEffect(
         () => {
             fetch("http://localhost:8088/locations")
@@ -17,6 +21,7 @@ export const LocationList = () => {
         []
     )
 
+    //onClick event handler in "shop at this location button" sets local storage info and pushes user to the "/products/order" route
     return (
         <>
             <h2 className="locations-heading">Locations</h2>

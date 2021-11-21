@@ -3,15 +3,19 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Employees.css"
 
 export const EmployeeForm = () => {
+   //useState hook declares a (new) employee state variable (initially an empty object) and update component for the form fields to use to update and build (new) employee object for the saveEmployee hiring component
     const [employee, update] = useState({
         manager: false,
         fullTime: false
     });
 
+    //useHistory() is a React hook that navigates to a specific Route using "the state variable".push("the routh path")
     const history = useHistory()
 
+    //useState hook establishes state variable and update component
     const [locations, updateLocations] = useState([])
 
+    //useEffect hook fetches locations array from API and updates location state using the update component established with useState
     useEffect(
         () => {
             fetch("http://localhost:8088/locations")
@@ -42,7 +46,7 @@ export const EmployeeForm = () => {
             },
             body: JSON.stringify(newEmployee)
         }
-
+        //Once the new employee object is saved ("hired"), history.push("/employees") is used to automatically redirect user to the employee list component
         return fetch("http://localhost:8088/employees", fetchOption)
             .then(() => {
                 history.push("/employees")
@@ -50,6 +54,10 @@ export const EmployeeForm = () => {
 
     }
 
+    //onChange event handlers are directly within the form elements to automatically update the (new)employee state
+    //onClick event handlers are  directly within the buttons at the end of the form to invoke the saveEmployee function or push to a different route (cancel button)
+
+    //****Clarification:::  Can use array.map() method within return statement(CORRECT TERM?) but other conditional components need to be handled outside the return (if statemets, declaring new variables before mapping, find, filter, etc)
     return (
         <form className="employeeForm">
             <h2 className="employeeForm__title">Hire Employee</h2>
