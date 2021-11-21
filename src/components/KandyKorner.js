@@ -7,7 +7,7 @@ import { NavBar } from "./nav/NavBar"
 
 
 //if there is currently a "kandy_customer" item in local storage, the ApplicaitonViews component with be invoked.
-//if not, user will be directed to the "/login" path where they can either Login or register a new user.
+//if not, user will be directed to the "/login" Route path where they can either Login or register a new user.
 
 export const KandyKorner = () => {
     return (
