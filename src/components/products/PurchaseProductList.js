@@ -4,26 +4,12 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import "./ProductList.css"
 
 export const PurchaseProductList = (props) => {
-
     //useState hooks declare three new state variables and their corresponding setter components for managing the state
-    const [products, updateProduct] = useState([])
     const [productLocationObjects, updateProductLocationObjects] = useState([])
     const [locations, updateLocations] = useState([])
-   
+
     //useHistory() is a React hook that navigates to a specific Route using "the state variable".push("the routh path")
     const history = useHistory()
-
-    //useEffect hook fetches all products from API and updates the products state array with that data using its setter component
-    useEffect(
-        () => {
-            fetch("http://localhost:8088/products")
-                .then(res => res.json())
-                .then((data) => {
-                    updateProduct(data)
-                })
-        },
-        []
-    )
 
     //useEffect hook fetches all locations from API and updates the locations state array with that data using its setter component
     useEffect(
@@ -40,7 +26,7 @@ export const PurchaseProductList = (props) => {
     //useEffect hook fetches all productLocations that have a locationId equal to the value of the local storage item "kandy_location" and updates the productLocationObjects state array with that data using its setter component
     useEffect(
         () => {
-            fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}`)
+            fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}&_expand=product`)
                 .then(res => res.json())
                 .then((data) => {
                     updateProductLocationObjects(data)
@@ -80,61 +66,53 @@ export const PurchaseProductList = (props) => {
             }
         )
 
-        //onChange even handler for location select to set the locationId into local storage, push the user to the products/order route (if they aren't already there - I think this may no longer be necessary since I changed the funtionality of the productList component) and re-fetch and update the productLocationObjects state to re-fresh the products list.
-        if (foundLocation) {
-            return <>
+        return <>
             <div className="purchase-products">
                 <div className="location-info">
-                <h2>You Are Currently Shopping at the <em>{foundLocation.city}</em> Location</h2>
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="location">Location:  </label>
-                        <select onChange={(event) => {
-                            localStorage.setItem("kandy_location", parseInt(event.target.value))
-                            history.push("/products/order")
-                            fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}`)
-                                .then(res => res.json())
-                                .then((data) => {
-                                    updateProductLocationObjects(data)
-                                })
-                        }}>
-                            <option key={`location--0`} value={`0`}>Select a different location</option>
-                            {locations.map(
-                                (location) => {
-                                    return <option key={`location--${location.id}`} value={location.id}>{location.city}</option>
-                                }
-                            )}
+                    <h2>You Are Currently Shopping at the <em>{foundLocation?.city}</em> Location</h2>
+                    <fieldset>
+                        <div className="form-group">
+                            <label htmlFor="location">Location:  </label>
+                            <select onChange={(event) => {
+                                localStorage.setItem("kandy_location", parseInt(event.target.value))
+                                fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}&_expand=product`)
+                                    .then(res => res.json())
+                                    .then((data) => {
+                                        updateProductLocationObjects(data)
+                                    })
+                            }}>
+                                <option key={`location--0`} value={`0`}>Select a different location</option>
+                                {locations.map(
+                                    (location) => {
+                                        return <option key={`location--${location.id}`} value={location.id}>{location.city}</option>
+                                    }
+                                )}
 
-                        </select>
-                    </div>
-                </fieldset>
+                            </select>
+                        </div>
+                    </fieldset>
                 </div>
                 <div className="productLocations--list">
-                {
-                    productLocationObjects.map(
-                        (productLocationObj) => {
-                            const foundProduct = products.find((product) => product.id === productLocationObj.productId)
-                            if (foundProduct) {
-                                //Extra Goal to Work On - find product type for each product and apply a specific className to div that can be used to style the background color differently.
+                    {
+                        productLocationObjects.map(
+                            (productLocationObj) => {
+
+                                //Extra Goal to Work On - find product type for each product and apply it as a className to the div that can be used to style the background color differently.
 
                                 return <div className="productLocations--item" key={`productLocation--${productLocationObj.id}`}>
-                                    <h3>{foundProduct.name}</h3>
-                                    <p>Price: ${foundProduct.price}</p>
+                                    <h3>{productLocationObj.product.name}</h3>
+                                    <p>Price: ${productLocationObj.product.price}</p>
                                     <button className="btn btn-primary" value={productLocationObj.id} onClick={purchaseProduct}>Purchase</button>
                                 </div>
-
                             }
-                        }
-                    )
-                }
+                        )
+                    }
                 </div>
-                </div>
-            </>
-        } else {
-            return <>
-                <h1>Please Select a Location First</h1>
-            </>
-        }
+            </div>
+        </>
+
+    } else {
+        return <><h1>Please Select a Location First</h1></>
     }
 }
 
