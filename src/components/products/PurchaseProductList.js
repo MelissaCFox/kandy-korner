@@ -115,6 +115,7 @@ export const PurchaseProductList = (props) => {
                         (productLocationObj) => {
                             const foundProduct = products.find((product) => product.id === productLocationObj.productId)
                             if (foundProduct) {
+                                //Extra Goal to Work On - find product type for each product and apply a specific className to div that can be used to style the background color differently.
 
                                 return <div className="productLocations--item" key={`productLocation--${productLocationObj.id}`}>
                                     <h3>{foundProduct.name}</h3>
