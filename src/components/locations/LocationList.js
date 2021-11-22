@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { fetchAllLocations } from "../APIManager";
 import './LocationList.css';
 
 export const LocationList = () => {
@@ -12,8 +13,7 @@ export const LocationList = () => {
     //useEffect hook fetches locations data from API and update state with updateLocation component declared in useState
     useEffect(
         () => {
-            fetch("http://localhost:8088/locations")
-                .then(res => res.json())
+            fetchAllLocations()
                 .then((data) => {
                     updateLocation(data)
                 })

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { fetchAllCustomers } from "../APIManager"
 import "./CustomerList.css"
 
 export const CustomerList = () => {
@@ -8,8 +9,7 @@ export const CustomerList = () => {
     //UseEffect hook fetches all customers and set customers state using updateCustomer state component
      useEffect(
         () => {
-            fetch("http://localhost:8088/customers")
-                .then(res => res.json())
+            fetchAllCustomers()
                 .then((data) => {
                     updateCustomer(data)
                 })

@@ -1,6 +1,7 @@
 //Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { fetchAllLocations, fetchProductLocationsForCurrentLocation, postPurchase } from "../APIManager"
 import "./ProductList.css"
 
 export const PurchaseProductList = (props) => {
@@ -14,8 +15,7 @@ export const PurchaseProductList = (props) => {
     //useEffect hook fetches all locations from API and updates the locations state array with that data using its setter component
     useEffect(
         () => {
-            fetch("http://localhost:8088/locations")
-                .then(res => res.json())
+            fetchAllLocations()
                 .then((data) => {
                     updateLocations(data)
                 })
@@ -26,8 +26,7 @@ export const PurchaseProductList = (props) => {
     //useEffect hook fetches all productLocations that have a locationId equal to the value of the local storage item "kandy_location" and updates the productLocationObjects state array with that data using its setter component
     useEffect(
         () => {
-            fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}&_expand=product`)
-                .then(res => res.json())
+            fetchProductLocationsForCurrentLocation()
                 .then((data) => {
                     updateProductLocationObjects(data)
                 })
@@ -44,15 +43,7 @@ export const PurchaseProductList = (props) => {
             datePurchased: new Date().toLocaleDateString()
         }
 
-        const fetchOption = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newPurchase)
-        }
-
-        return fetch("http://localhost:8088/purchases", fetchOption)
+        postPurchase(newPurchase)
             .then(() => {
                 history.push("/purchases")
             })
@@ -75,8 +66,7 @@ export const PurchaseProductList = (props) => {
                             <label htmlFor="location">Location:  </label>
                             <select onChange={(event) => {
                                 localStorage.setItem("kandy_location", parseInt(event.target.value))
-                                fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}&_expand=product`)
-                                    .then(res => res.json())
+                                fetchProductLocationsForCurrentLocation()
                                     .then((data) => {
                                         updateProductLocationObjects(data)
                                     })

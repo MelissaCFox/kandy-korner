@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { fetchAllProducts } from "./APIManager"
 
 export const Test = () => {
 
@@ -21,8 +22,7 @@ export const Test = () => {
     //useEffect hook fetches products data from API and sets it to the products state variable with its setter component
     useEffect(
         () => {
-            fetch("http://localhost:8088/products")
-                .then(res => res.json())
+            fetchAllProducts()
                 .then((data) => {
                     updateProducts(data)
                 })
@@ -32,8 +32,8 @@ export const Test = () => {
 
     //------This is not currently rendering anything on the page and no errors are showing up in dev tools
     return <>
-        <h2>Test: ProductLocation Product Info</h2>
-
+        <h2>Test: </h2>
+        
         {
             locations.map(
                 (locationObj) => {
@@ -45,7 +45,7 @@ export const Test = () => {
                                     return product.id === productLocationObj.productId
                                 }
                             )
-                            debugger
+                            
                             if (foundProduct) {
                                 return <div key={productLocationObj.id}>
                                     Product Name: {foundProduct.name}
@@ -64,23 +64,3 @@ export const Test = () => {
     </>
 
 }
-
-//-----This didn't work either...
-
-// {
-//     locations.forEach(
-//         (locationObj) => {
-//             locationObj.productLocations.map(
-//                 (productLocationObject) => {
-
-//                     return <div key={productLocationObject.id}>
-//                         ProductId: {productLocationObject.productId}, LocationID: {productLocationObject.locationId}
-
-//                     </div>
-//                 }
-//             )
-
-//         }
-//     )
-
-// }

@@ -1,6 +1,7 @@
 //Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { fetchAllProductTypes, fetchProductsWithProductTypes } from "../APIManager"
 import "./ProductList.css"
 
 export const ProductList = () => {
@@ -11,8 +12,7 @@ export const ProductList = () => {
     //useEffect hook fetches all products from the API, with expanded data associated with the productType foreign key (and sorted by productTypeId) and sets the products state with the data using the updateProduct component
     useEffect(
         () => {
-            fetch("http://localhost:8088/products?_expand=productType&_sort=productTypeId")
-                .then(res => res.json())
+            fetchProductsWithProductTypes()
                 .then((data) => {
                     updateProduct(data)
                 })
@@ -23,8 +23,7 @@ export const ProductList = () => {
     //useEffect hook fetches all product types from the API and sets that array equal to the productTypes state using its update component.
     useEffect(
         () => {
-            fetch("http://localhost:8088/productTypes")
-                .then(res => res.json())
+            fetchAllProductTypes()
                 .then((data) => {
                     updateProductTypes(data)
                 })
