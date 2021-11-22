@@ -4,10 +4,11 @@ import { Link } from "react-router-dom"
 import "./ProductList.css"
 
 export const ProductList = () => {
+    //useState hooks declare two new state variables: products and productTypes with their corresponding update components
     const [products, updateProduct] = useState([])
     const [productTypes, updateProductTypes] = useState([])
 
-
+    //useEffect hook fetches all products from the API, with expanded data associated with the productType foreign key (and sorted by productTypeId) and sets the products state with the data using the updateProduct component
     useEffect(
         () => {
             fetch("http://localhost:8088/products?_expand=productType&_sort=productTypeId")
@@ -19,6 +20,7 @@ export const ProductList = () => {
         []
     )
 
+    //useEffect hook fetches all product types from the API and sets that array equal to the productTypes state using its update component.
     useEffect(
         () => {
             fetch("http://localhost:8088/productTypes")
@@ -32,7 +34,8 @@ export const ProductList = () => {
 
 
 
-
+    //map through the products state array, find the productType object associated with each product, and display all relevant details in item list.
+    // "?" after object variable and before dot notation for key checks that that variable exists before looking for the property (replaces an if statement)
     return <>
         <div className="products__page">
 

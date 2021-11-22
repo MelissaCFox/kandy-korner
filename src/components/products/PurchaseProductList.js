@@ -4,11 +4,16 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import "./ProductList.css"
 
 export const PurchaseProductList = (props) => {
+
+    //useState hooks declare three new state variables and their corresponding setter components for managing the state
     const [products, updateProduct] = useState([])
     const [productLocationObjects, updateProductLocationObjects] = useState([])
     const [locations, updateLocations] = useState([])
+   
+    //useHistory() is a React hook that navigates to a specific Route using "the state variable".push("the routh path")
     const history = useHistory()
 
+    //useEffect hook fetches all products from API and updates the products state array with that data using its setter component
     useEffect(
         () => {
             fetch("http://localhost:8088/products")
@@ -20,6 +25,7 @@ export const PurchaseProductList = (props) => {
         []
     )
 
+    //useEffect hook fetches all locations from API and updates the locations state array with that data using its setter component
     useEffect(
         () => {
             fetch("http://localhost:8088/locations")
@@ -31,6 +37,7 @@ export const PurchaseProductList = (props) => {
         []
     )
 
+    //useEffect hook fetches all productLocations that have a locationId equal to the value of the local storage item "kandy_location" and updates the productLocationObjects state array with that data using its setter component
     useEffect(
         () => {
             fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}`)
@@ -42,7 +49,7 @@ export const PurchaseProductList = (props) => {
         []
     )
 
-
+    //purchaseProduct component finishes by pushing the user to the purchases component using the useHistory hook declared above
     const purchaseProduct = (event) => {
         event.preventDefault()
         const newPurchase = {
@@ -65,6 +72,7 @@ export const PurchaseProductList = (props) => {
             })
     }
 
+
     if (localStorage.getItem("kandy_location")) {
         const foundLocation = locations.find(
             (location) => {
@@ -72,6 +80,7 @@ export const PurchaseProductList = (props) => {
             }
         )
 
+        //onChange even handler for location select to set the locationId into local storage, push the user to the products/order route (if they aren't already there - I think this may no longer be necessary since I changed the funtionality of the productList component) and re-fetch and update the productLocationObjects state to re-fresh the products list.
         if (foundLocation) {
             return <>
             <div className="purchase-products">

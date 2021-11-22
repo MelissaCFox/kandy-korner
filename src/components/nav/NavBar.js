@@ -2,6 +2,9 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
 
+
+//onClick event handler in logout button removes the two local storage items (customer and location) so that the user is redirected to the login page and the new user, once logged in, does not have a location id already set into local storage
+
 export const NavBar = () => {
     return (
         <ul className="navbar">
