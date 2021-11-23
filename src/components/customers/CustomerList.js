@@ -1,38 +1,58 @@
 import React, { useEffect, useState } from "react"
-import { fetchAllCustomers } from "../APIManager"
 import "./CustomerList.css"
 
 export const CustomerList = () => {
-    //useState hook declares a new customers state and updateCustomer component to manage the customers state
-    const [customers, updateCustomer] = useState([])
 
-    //UseEffect hook fetches all customers and set customers state using updateCustomer state component
-     useEffect(
+
+    const [customerPurchases, updateCustomerPurchases] = useState([])
+
+    useEffect(
         () => {
-            fetchAllCustomers()
+            return fetch("http://localhost:8088/customers?_embed=purchases")
+                .then(res => res.json())
                 .then((data) => {
-                    updateCustomer(data)
+                    updateCustomerPurchases(data)
                 })
         },
         []
     )
 
-  //map through customer state to render jsx with customer details
+    //Sort CustomerPurchases state array and return as a new array that will be mapped-through in return below:
+    const getSortedCustomerPurchases = () => {
+        return customerPurchases.map(customer => ({...customer})).sort(
+            (a,b) => b.purchases.length - a.purchases.length)
+    }
+
+    const sortedCustomerPurchases = getSortedCustomerPurchases()
+    
+
+    //map through customer state to render jsx with customer details
     return (
 
         <>
-        <div className="customer-list">
-            {
-                customers.map(
-                    (customer) => {
-                        return <div key={`customer--${customer.id}`}>
-                            <h3>{customer.name}</h3>
-                            <section className="customer_email">Email: {customer.email}</section>
-
-                        </div>
+            <div className="customer-list">
+                <table className="customers-table">
+                    <thead>
+                    <tr className="table-headings">
+                        <th>Customer</th>
+                        <th>Candies Bought</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        sortedCustomerPurchases.map(
+                            
+                            (customer) => {
+                               
+                                return <tr key={`customer--${customer.id}`} className="customer__details">
+                                    <td className="customer__name">{customer.name}</td>
+                                    <td className="customer__email">{customer.purchases.length}</td>
+                                </tr>
+                            }
+                        )
                     }
-                )
-            }
+                    </tbody>
+                </table>
             </div>
         </>
     )
