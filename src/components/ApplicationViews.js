@@ -7,7 +7,6 @@ import { LocationList } from "./locations/LocationList";
 import { MyOrders } from "./orders/MyOrders";
 import { ProductList } from "./products/ProductList";
 import { PurchaseProductList } from "./products/PurchaseProductList";
-import { Test } from "./Test";
 
 
 export const ApplicationViews = () => {
@@ -43,10 +42,6 @@ export const ApplicationViews = () => {
 
             <Route path="/purchases">
                 <MyOrders />
-            </Route>
-
-            <Route path="/test">
-                <Test />
             </Route>
 
         </>
