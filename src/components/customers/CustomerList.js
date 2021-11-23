@@ -32,13 +32,13 @@ export const CustomerList = () => {
         <>
             <div className="customer-list">
                 <table className="customers-table">
-                    <thead>
+                    <thead className="table-heading">
                     <tr className="table-headings">
-                        <th>Customer</th>
-                        <th>Candies Bought</th>
+                        <th className="table-heading-customer">Customer</th>
+                        <th className="table-heading-candies">Candies Bought</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="table-body">
                     {
                         sortedCustomerPurchases.map(
                             

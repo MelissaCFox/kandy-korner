@@ -1,3 +1,33 @@
-.customer-list {
-    margin-left: 10rem;
+table {
+    margin: auto;
+}
+
+.table-body {
+    background-color: rgb(205, 234, 247);
+
+}
+
+.table-headings {
+    height: 4rem;
+    background-color: rgb(142, 167, 137);
+    font-size: 1.5rem;
+}
+
+.table-heading-customer {
+    width: 20rem;
+    border-bottom: solid black;
+}
+
+.table-heading-candies {
+    width: 10rem;
+    border-bottom: solid black;
+    margin: 0;
+}
+
+.customer__details {
+    text-align: center;
+}
+
+.customer__name {
+    padding: 0.75rem 0;
 }

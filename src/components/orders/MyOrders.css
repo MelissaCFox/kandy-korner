@@ -11,3 +11,45 @@
     width: 20%;
     padding-bottom: 1rem;
 }
+
+
+
+table {
+    margin: auto;
+}
+
+.purchases-body {
+    background-color: rgb(205, 234, 247);
+
+}
+
+.purchases-headings {
+    height: 4rem;
+    background-color: rgb(142, 167, 137);
+    font-size: 1.5rem;
+}
+
+.purchases-heading-candy {
+    width: 20rem;
+    border-bottom: solid black;
+}
+
+.purchases-heading-quantity  {
+    width: 10rem;
+    border-bottom: solid black;
+    margin: 0;
+}
+
+.purchases-heading-cost{
+    width: 10rem;
+    border-bottom: solid black;
+    margin: 0;
+}
+
+.foundProduct__details {
+    text-align: center;
+}
+
+.foundProduct__name {
+    padding: 0.75rem 0;
+}
