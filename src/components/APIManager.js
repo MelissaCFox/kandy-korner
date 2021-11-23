@@ -14,6 +14,11 @@ export const fetchAllLocations = () => {
         .then(res => res.json())
 }
 
+export const fetchLocationsWithProductLocations = () => {
+    return fetch("http://localhost:8088/locations?_embed=productLocations")
+        .then(res => res.json())
+}
+
 export const postEmployee = (newEmployee) => {
 
     return fetch("http://localhost:8088/employees", {
@@ -63,6 +68,11 @@ export const fetchProductsWithProductTypes = () => {
 
 export const fetchProductLocationsForCurrentLocation = () => {
     return fetch(`http://localhost:8088/productLocations?locationId=${parseInt(localStorage.getItem("kandy_location"))}&_expand=product`)
+    .then(res => res.json())
+}
+
+export const fetchProductLocationByProductId = (id) => {
+    return fetch(`http://localhost:8088/productLocations?productId=${parseInt(id)}`)
     .then(res => res.json())
 }
 

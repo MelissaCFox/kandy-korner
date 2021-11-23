@@ -1,6 +1,6 @@
 //Importing React itself is no longer necessary
 import React, { useEffect, useState } from "react"
-import { fetchAllLocations, fetchAllProducts, fetchCurrentCustomer, fetchPurchasesofCurrentUser } from "../APIManager"
+import { fetchAllProducts, fetchCurrentCustomer, fetchPurchasesofCurrentUser } from "../APIManager"
 import "./MyOrders.css"
 
 export const MyOrders = () => {
