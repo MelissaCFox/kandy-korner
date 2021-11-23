@@ -4,12 +4,40 @@ import { fetchAllLocations, fetchAllProducts, fetchCurrentCustomer, fetchPurchas
 import "./MyOrders.css"
 
 export const MyOrders = () => {
-    //useState hooks declare new state variables: purcahses and products (both arrays) and their corresponding update components
+    //useState hooks declare new state variables: purchases and products (both arrays) and their corresponding update components
     const [purchases, updatePurchases] = useState([])
     const [products, updateProducts] = useState([])
-    const [locations, updateLocations] = useState([])
+    // const [locations, updateLocations] = useState([])
     //useState hook declares a new currentCustomer state variable (an object) and it's corresponding update component
     const [currentCustomer, changeCurrentCustomer] = useState({})
+
+    const [purchasedProducts, updatePurchasedProdcuts] = useState([])
+
+    useEffect(
+        () => {
+            fetchPurchasesofCurrentUser()
+                .then(() => {
+                    fetchAllProducts()
+                }).then(() => {
+                    const purchasedProductsArray = []
+                    for (const purchase of purchases) {
+                        const existingPurchaseProduct = purchasedProductsArray.find(obj => obj.productId === purchase.productLocation.productId)
+                        if (existingPurchaseProduct) {
+                            existingPurchaseProduct.quantity = existingPurchaseProduct.quantity + 1
+                        } else {
+                            const newPurchaseProduct = {
+                                id: purchase.productLocation.productId,
+                                productId: purchase.productLocation.productId,
+                                quantity: 1
+                            }
+                            purchasedProductsArray.push(newPurchaseProduct)
+                        }
+                    }
+                    updatePurchasedProdcuts(purchasedProductsArray)
+                })
+        },
+        [purchases]
+    )
 
     //useEffect hook fetches purchases specifically associated with the customerId of the value stored in local storage ("kandy_customer"), with expanded productLocation data, then updates the purchases state as that array.
     useEffect(
@@ -45,16 +73,15 @@ export const MyOrders = () => {
         []
     )
 
-    useEffect(
-        () => {
-            fetchAllLocations()
-                .then((data) => {
-                    updateLocations(data)
-                })
-        },
-        []
-    )
-
+    // useEffect(
+    //     () => {
+    //         fetchAllLocations()
+    //             .then((data) => {
+    //                 updateLocations(data)
+    //             })
+    //     },
+    //     []
+    // )
 
 
     //check length of the purchases state (an array). As long as it's not empty (length > 0), map through purchases and find the product object associated with each purchase (productLocation object) to display product details for each list element. If the purchases array is empty, display an alternate "No Recent Orders" message.
@@ -64,25 +91,34 @@ export const MyOrders = () => {
                 <h2 className="heading">Orders For {currentCustomer.name}</h2>
                 <div className="customer-list">
 
-                    {
-                        purchases.map(
-                            (purchase) => {
-                                const foundProduct = products.find(
-                                    (product) => product.id === purchase.productLocation.productId
-                                )
-                                const foundLocation = locations.find(
-                                    (location) => location.id === purchase.productLocation.locationId
-                                )
-                                return <div className="purchase__item" key={`purchase--${purchase.id}`}>
-                                    <h3>Purchase # {purchase.id}</h3>
-                                    <section className="purchase__productName">Product Name: {foundProduct?.name}</section>
-                                    <section className="purchase__productPrice">Price: ${foundProduct?.price}</section>
-                                    <section className="purchase__productLocationCity">Purchased at the {foundLocation?.city} location</section>
-                                </div>
+                    <table className="purchases-table">
+                        <thead>
+                            <tr className="purchases-headings">
+                                <th>Candy</th>
+                                <th>Quantity</th>
+                                <th>Total Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                purchasedProducts.map(
 
+                                    (productObj) => {
+                                        const foundProduct = products.find(
+                                            (product) => product.id === productObj.productId
+                                        )
+                                        const totalCost = foundProduct?.price * productObj.quantity
+
+                                        return <tr key={`product--${productObj.id}`} className="foundProduct__details">
+                                            <td className="foundProduct__name">{foundProduct?.name}</td>
+                                            <td className="foundProduct__quantity">{productObj.quantity}</td>
+                                            <td className="foundProduct__totalCost">{totalCost}</td>
+                                        </tr>
+                                    }
+                                )
                             }
-                        )
-                    }
+                        </tbody>
+                    </table>
                 </div>
             </>
         )
@@ -99,31 +135,25 @@ export const MyOrders = () => {
 
 
 
-/* <table className="purchases-table">
-<thead>
-<tr className="purchases-headings">
-    <th>Candy</th>
-    <th>Quantity</th>
-    <th>Total Price</th>
-</tr>
-</thead>
-<tbody>
-{
-    purchasedProducts.map( 
-    
-        (productObj) => {
-            const foundProduct = products.find(
-                (product) => product.id === productObj.productId
-            ) 
 
-            
-            return <tr key={`product--${productObj.id}`} className="foundProduct__details">
-                <td className="foundProduct__name">{foundProduct?.name}</td>
-                <td className="foundProduct__quantity">{productObj.quantity}</td>
-                
-            </tr>
-        }
-    )
-}
-</tbody>
-</table> */
+
+
+// {
+//     purchases.map(
+//         (purchase) => {
+//             const foundProduct = products.find(
+//                 (product) => product.id === purchase.productLocation.productId
+//             )
+//             const foundLocation = locations.find(
+//                 (location) => location.id === purchase.productLocation.locationId
+//             )
+//             return <div className="purchase__item" key={`purchase--${purchase.id}`}>
+//                 <h3>Purchase # {purchase.id}</h3>
+//                 <section className="purchase__productName">Product Name: {foundProduct?.name}</section>
+//                 <section className="purchase__productPrice">Price: ${foundProduct?.price}</section>
+//                 <section className="purchase__productLocationCity">Purchased at the {foundLocation?.city} location</section>
+//             </div>
+
+//         }
+//     )
+// }

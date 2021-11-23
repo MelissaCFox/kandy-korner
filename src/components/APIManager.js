@@ -75,3 +75,8 @@ export const postPurchase = (newPurchase) => {
         body: JSON.stringify(newPurchase)
     })
 }
+
+export const fetchCustomersWithPurchases = () => {
+    return fetch("http://localhost:8088/customers?_embed=purchases")
+                .then(res => res.json())
+}
