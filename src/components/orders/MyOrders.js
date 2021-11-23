@@ -21,7 +21,7 @@ export const MyOrders = () => {
         },
         []
     )
-    
+
     //useEffect hook fetches all products and updates the products state with that array using the updateProducts component
     useEffect(
         () => {
@@ -55,7 +55,7 @@ export const MyOrders = () => {
         []
     )
 
-    
+
 
     //check length of the purchases state (an array). As long as it's not empty (length > 0), map through purchases and find the product object associated with each purchase (productLocation object) to display product details for each list element. If the purchases array is empty, display an alternate "No Recent Orders" message.
     if (purchases.length > 0) {
@@ -94,3 +94,36 @@ export const MyOrders = () => {
         </>
     }
 }
+
+
+
+
+
+/* <table className="purchases-table">
+<thead>
+<tr className="purchases-headings">
+    <th>Candy</th>
+    <th>Quantity</th>
+    <th>Total Price</th>
+</tr>
+</thead>
+<tbody>
+{
+    purchasedProducts.map( 
+    
+        (productObj) => {
+            const foundProduct = products.find(
+                (product) => product.id === productObj.productId
+            ) 
+
+            
+            return <tr key={`product--${productObj.id}`} className="foundProduct__details">
+                <td className="foundProduct__name">{foundProduct?.name}</td>
+                <td className="foundProduct__quantity">{productObj.quantity}</td>
+                
+            </tr>
+        }
+    )
+}
+</tbody>
+</table> */
